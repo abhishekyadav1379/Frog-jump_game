@@ -3,6 +3,7 @@ var background = document.getElementById("background");
 var owl = document.getElementById("owl");
 
 var frog = document.getElementById("frog");
+var insect1 = document.getElementById("insect1");
 
 
 var ctx = canvas.getContext('2d');
@@ -33,11 +34,9 @@ var auto=0,space=0;
 var auto=0,xbg=0;   //background
 var xwater=0;  vel_water=4; //water
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var ins_x=canvas.width, ins_y=450, Bool=false;  //insect 
 var xbg=0;   //background
-var xwater=0;  vel_water=4; //water
-
 var auto=0;
-var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var space =0;
 var xowl=0,yowl=50, boolowl=false;       //owl
 

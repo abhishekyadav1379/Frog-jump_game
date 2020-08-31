@@ -1,14 +1,43 @@
 var canvas = document.getElementById("s1");
 var background = document.getElementById("background");
 
+var frog = document.getElementById("frog");
+
 
 var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+window.addEventListener("keydown", moveSomething, false);
+function moveSomething(e) {
+    switch(e.keyCode) {
+    case 32:
+        // space bar
+        
+        if(space==0){
+        // document.getElementById("frogjump").play(); 
+        auto = 1;
+        space=1;
+        }
+        break;
+    case 65:   //                    
+        // q
+        fx-=10;
+        break;        
+    case 13:   //enter
+        // document.getElementById("river").play();
+        // page=2;
+        break;
+    }
+}
+
+
 // global variable 
 var auto=0,xbg=0;   //background
 var xwater=0;  vel_water=4; //water
+var auto=0,space=0;
+var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var space =0;
 
 function gameloop(){
     //background
@@ -25,6 +54,28 @@ function gameloop(){
     ctx.drawImage(water, xwater+canvas.width ,520, canvas.width, 140);
     if( xwater < (-1*canvas.width) ){
         xwater = 0;
+    }
+
+     //frog
+     if(auto==1){
+        fy -=10;
+        fx+=xjump;
+        if(fy<=400){
+            auto=0;
+            fy +=10;
+        }
+    }
+    if(auto==0 && fy>=400 && fy <canvas.height-100){
+        fy +=10;
+        fx+=xjump;
+    }
+    if(fy==557){
+        space=0;
+    }
+    // console.log(fy);
+    ctx.drawImage(frog,fx,fy,100,50);
+    if(fx>=0){
+        fx-=1;
     }
 
 }

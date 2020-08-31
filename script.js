@@ -33,7 +33,11 @@ var auto=0,space=0;
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var xbg=0;   //background
 var xwater=0;  vel_water=4; //water
+var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var space =0;
 var xowl=0,yowl=50, boolowl=false;       //owl
+var ins_x=canvas.width, ins_y=450, Bool=false;  //insect 
+
 
 function gameloop(){
     //background
@@ -50,6 +54,28 @@ function gameloop(){
     ctx.drawImage(water, xwater+canvas.width ,520, canvas.width, 140);
     if( xwater < (-1*canvas.width) ){
         xwater = 0;
+    }
+
+     //frog
+     if(auto==1){
+        fy -=10;
+        fx+=xjump;
+        if(fy<=400){
+            auto=0;
+            fy +=10;
+        }
+    }
+    if(auto==0 && fy>=400 && fy <canvas.height-100){
+        fy +=10;
+        fx+=xjump;
+    }
+    if(fy==557){
+        space=0;
+    }
+    // console.log(fy);
+    ctx.drawImage(frog,fx,fy,100,50);
+    if(fx>=0){
+        fx-=1;
     }
 
     //owl
@@ -92,6 +118,30 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
+    // insect
+    if( ins_y>449 && Bool == false )
+    {
+        ins_y += 1;
+        if( ins_y>=500 )
+        {
+            Bool = true;
+        }
+    }
+    if(Bool == true)
+        {
+            ins_y -= 1;
+            if( ins_y<450 )
+            {
+                Bool = false;
+                ins_y = 450;
+            }
+        }
+        if(ins_x<-50){
+            ins_x=canvas.width;
+        }
+    ctx.drawImage(insect1, ins_x,ins_y,50,30);
+    ins_x -= 5;
+
 
 }
 

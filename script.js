@@ -30,13 +30,16 @@ function moveSomething(e) {
 
 // global variable 
 var auto=0,space=0;
+var auto=0,xbg=0;   //background
+var xwater=0;  vel_water=4; //water
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var xbg=0;   //background
 var xwater=0;  vel_water=4; //water
+
+var auto=0;
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var space =0;
 var xowl=0,yowl=50, boolowl=false;       //owl
-var ins_x=canvas.width, ins_y=450, Bool=false;  //insect 
 
 
 function gameloop(){
@@ -55,6 +58,7 @@ function gameloop(){
     if( xwater < (-1*canvas.width) ){
         xwater = 0;
     }
+
 
      //frog
      if(auto==1){
@@ -77,6 +81,7 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
+
 
     //owl
     if(boolowl){
@@ -118,7 +123,8 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
-    // insect
+
+    //insect
     if( ins_y>449 && Bool == false )
     {
         ins_y += 1;

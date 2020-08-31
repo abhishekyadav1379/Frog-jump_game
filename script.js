@@ -10,6 +10,7 @@ canvas.height = window.innerHeight;
 // global variable 
 var auto=0,xbg=0;   //background
 var xwater=0;  vel_water=4; //water
+var xowl=0,yowl=50, boolowl=false;       //owl
 
 function gameloop(){
     //background
@@ -28,6 +29,24 @@ function gameloop(){
         xwater = 0;
     }
 
+    //owl
+    if(boolowl){
+        yowl-=0.5;
+        if(yowl<51){
+            boolowl=false;
+        }
+    }
+    else{
+        yowl+=0.5;
+        if(yowl>101){
+            boolowl=true;
+        }
+    }
+    if(xowl>canvas.width){
+        xowl=0;
+    }
+    ctx.drawImage(owl, xowl,yowl,100,80);
+    xowl +=4;
 }
 
 // fps

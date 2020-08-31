@@ -16,33 +16,29 @@ function moveSomething(e) {
         // space bar
         
         if(space==0){
-        // document.getElementById("frogjump").play(); 
+        console.log("space");
         auto = 1;
         space=1;
         }
         break;
-    case 65:   //                    
-        // q
+    case 65:
         fx-=10;
         break;        
-    case 13:   //enter
-        // document.getElementById("river").play();
-        // page=2;
-        break;
     }
 }
 
 
 // global variable 
-var auto=0,xbg=0;   //background
-var xwater=0;  vel_water=4; //water
-<<<<<<< HEAD
 var auto=0,space=0;
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var xbg=0;   //background
+var xwater=0;  vel_water=4; //water
+
+var auto=0;
+var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var space =0;
-=======
 var xowl=0,yowl=50, boolowl=false;       //owl
->>>>>>> a5ed62239f4bbd1c1912294c4275adb7c3424f26
+
 
 function gameloop(){
     //background
@@ -61,7 +57,7 @@ function gameloop(){
         xwater = 0;
     }
 
-<<<<<<< HEAD
+
      //frog
      if(auto==1){
         fy -=10;
@@ -84,7 +80,7 @@ function gameloop(){
         fx-=1;
     }
 
-=======
+
     //owl
     if(boolowl){
         yowl-=0.5;
@@ -103,7 +99,30 @@ function gameloop(){
     }
     ctx.drawImage(owl, xowl,yowl,100,80);
     xowl +=4;
->>>>>>> a5ed62239f4bbd1c1912294c4275adb7c3424f26
+
+
+    //frog 
+    if(auto==1){
+        fy -=10;
+        fx+=xjump;
+        if(fy<=400){
+            auto=0;
+            fy +=10;
+        }
+    }
+    if(auto==0 && fy>=400 && fy <canvas.height-100){
+        fy +=10;
+        fx+=xjump;
+    }
+    if(fy>=557){
+        space=0;
+    }
+    // console.log(fy);
+    ctx.drawImage(frog,fx,fy,100,50);
+    if(fx>=0){
+        fx-=1;
+    }
+
 }
 
 // fps

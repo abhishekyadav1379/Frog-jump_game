@@ -13,6 +13,11 @@ var xwater=0;  vel_water=4; //water
 function gameloop(){
     //background
     ctx.drawImage(background, xbg ,0, canvas.width, canvas.height);
+    xbg -= 1.5;
+    ctx.drawImage(background, xbg+canvas.width ,0, canvas.width, canvas.height);
+    if( xbg < (-1*canvas.width) ){
+        xbg = 0;
+    }
     
     // water
     ctx.drawImage(water, xwater ,520, canvas.width, 140);
@@ -27,6 +32,6 @@ function gameloop(){
 // fps
 function start() {
     window.requestAnimationFrame(start);  // refresh rate of screen 
-   gameloop();
+    gameloop();
 }
 start();

@@ -124,6 +124,8 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
+
+    //insect
     if( ins_y>449 && Bool == false )
     {
         ins_y += 1;

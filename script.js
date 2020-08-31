@@ -1,5 +1,6 @@
 var canvas = document.getElementById("s1");
 var background = document.getElementById("background");
+var owl = document.getElementById("owl");
 
 
 var ctx = canvas.getContext('2d');

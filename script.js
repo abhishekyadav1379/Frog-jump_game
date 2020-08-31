@@ -30,6 +30,8 @@ function moveSomething(e) {
 
 // global variable 
 var auto=0,space=0;
+var auto=0,xbg=0;   //background
+var xwater=0;  vel_water=4; //water
 var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var xbg=0;   //background
 var xwater=0;  vel_water=4; //water
@@ -122,6 +124,29 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
+    if( ins_y>449 && Bool == false )
+    {
+        ins_y += 1;
+        if( ins_y>=500 )
+        {
+            Bool = true;
+        }
+    }
+    if(Bool == true)
+        {
+            ins_y -= 1;
+            if( ins_y<450 )
+            {
+                Bool = false;
+                ins_y = 450;
+            }
+        }
+        if(ins_x<-50){
+            ins_x=canvas.width;
+        }
+    ctx.drawImage(insect1, ins_x,ins_y,50,30);
+    ins_x -= 5;
+
 
 }
 

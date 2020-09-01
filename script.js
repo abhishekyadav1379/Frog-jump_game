@@ -199,7 +199,6 @@ function gameloop(){
         life -= 10;
         if(life<0){
             page=3;
-            console.log("gameover");
         }
     }
 
@@ -221,7 +220,6 @@ function gameloop(){
     || ((fx+100-5 <= px3) && (px3 <= fx+100+5) && (fy<(canvas.height-100)))
     || ((fx+100-5 <= px4) && (px4 <= fx+100+5) && (fy<(canvas.height-100)))    )
     {
-        console.log(score);
         score +=10;
     }
 

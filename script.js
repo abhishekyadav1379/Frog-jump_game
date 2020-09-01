@@ -1,6 +1,7 @@
 var canvas = document.getElementById("s1");
 var background = document.getElementById("background");
 var owl = document.getElementById("owl");
+var plant = document.getElementById("plant");
 
 var frog = document.getElementById("frog");
 
@@ -34,6 +35,8 @@ var fx=0,fy=canvas.height-100, xjump=6;  //frog
 var xbg=0;   //background
 var xwater=0;  vel_water=4; //water
 var xowl=0,yowl=50, boolowl=false;       //owl
+var px=canvas.width,px2=canvas.width+canvas.width/1.25;      // plant
+var px3 = canvas.width+canvas.width/2.2, px4 = canvas.width+canvas.width/4;
 
 function gameloop(){
     //background
@@ -93,6 +96,28 @@ function gameloop(){
         fx-=1;
     }
 
+    //plant 
+    if(px<-20){
+        px=canvas.width;
+    }
+    if(px2<-20){
+        px2=canvas.width;
+    }
+    if(px3<-20){
+        px3 = canvas.width;
+    }    
+    if(px4<-20){
+        px4 =canvas.width;
+    }
+    px -=vel_water;
+    px2 -=vel_water;
+    px3 -=vel_water;
+    px4 -=vel_water;
+
+    ctx.drawImage(plant, px, 520, 80, 100);
+    ctx.drawImage(plant,px2,520,80,100);
+    ctx.drawImage(plant,px3,520,80,100);
+    ctx.drawImage(plant, px4, 520,80,100)
 }
 
 // fps

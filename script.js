@@ -18,7 +18,6 @@ function moveSomething(e) {
         // space bar
         
         if(space==0){
-        console.log("space");
         auto = 1;
         space=1;
         }
@@ -43,7 +42,7 @@ var xowl=0,yowl=50, boolowl=false;       //owl
 var px=canvas.width,px2=canvas.width+canvas.width/1.25;      // plant
 var px3 = canvas.width+canvas.width/2.2, px4 = canvas.width+canvas.width/4;
 var life = 100;
-
+var score = 0;
 
 function gameloop(){
     //background
@@ -191,6 +190,27 @@ function gameloop(){
         }
     }
 
+    //score
+    ctx.font="30px Comic Sans MS";
+    ctx.fillStyle = "black";
+    // ctx.textAlign = "center";
+    ctx.fillText("score : " + score, canvas.width-100, 50);
+
+    // 
+    if(score>100){
+        vel_water=6;
+        xjump=4;
+    }
+
+    // socre increment
+    if(   ((fx+100-5 <= px) && (px <= fx+100+5) && (fy<(canvas.height-100))) 
+    || ((fx+100-5 <= px2) && (px2 <= fx+100+5) && (fy<(canvas.height-100)))
+    || ((fx+100-5 <= px3) && (px3 <= fx+100+5) && (fy<(canvas.height-100)))
+    || ((fx+100-5 <= px4) && (px4 <= fx+100+5) && (fy<(canvas.height-100)))    )
+    {
+        console.log(score);
+        score +=10;
+    }
 
 }
 

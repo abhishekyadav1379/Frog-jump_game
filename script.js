@@ -19,6 +19,7 @@ function moveSomething(e) {
         // space bar
         
         if(space==0){
+        document.getElementById("frogjump").play(); 
         auto = 1;
         space=1;
         }
@@ -27,7 +28,7 @@ function moveSomething(e) {
         fx-=10;
         break;      
     case 13:   //enter
-        // document.getElementById("river").play();
+        document.getElementById("river").play();
         page=2;  
     }
 }
@@ -85,7 +86,7 @@ function gameloop(){
         fy +=10;
         fx+=xjump;
     }
-    if(fy==557){
+    if(fy>=557){
         space=0;
     }
     // console.log(fy);
@@ -194,6 +195,7 @@ function gameloop(){
     || ((fx+100-5 <= px3) && (px3 <= fx+100) && (fy==(canvas.height-100)))
     || ((fx+100-5 <= px4) && (px4 <= fx+100) && (fy==(canvas.height-100)))    )
     {
+        document.getElementById("beep").play();
         life -= 10;
         if(life<0){
             page=3;

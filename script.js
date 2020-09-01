@@ -7,6 +7,8 @@ var plant = document.getElementById("plant");
 var frog = document.getElementById("frog");
 var insect1 = document.getElementById("insect1");
 
+var gameover1 = document.getElementById("gameover");
+
 
 var ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -197,6 +199,7 @@ function gameloop(){
         life -= 10;
         if(life<0){
             page=3;
+            console.log("gameover");
         }
     }
 
@@ -223,7 +226,13 @@ function gameloop(){
     }
 
 }
-
+//gameover
+function gameover(){
+    ctx.drawImage(gameover1, 0,0,canvas.width,canvas.height);
+    ctx.font="40px Gill Sans";
+    ctx.fillStyle = "black";
+    ctx.fillText(score, canvas.width/2, canvas.height/1.25);
+}
 // fps
 function start() {
     window.requestAnimationFrame(start);  // refresh rate of screen 
@@ -233,5 +242,8 @@ function start() {
     else if(page==2){
         gameloop();
     }         
+    else if(page==3){
+        gameover();
+    }
 }
 start();

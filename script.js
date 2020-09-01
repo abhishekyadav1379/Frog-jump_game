@@ -1,3 +1,4 @@
+var menu = document.getElementById("menu");
 var canvas = document.getElementById("s1");
 var background = document.getElementById("background");
 var owl = document.getElementById("owl");
@@ -24,7 +25,10 @@ function moveSomething(e) {
         break;
     case 65:
         fx-=10;
-        break;        
+        break;      
+    case 13:   //enter
+        // document.getElementById("river").play();
+        page=2;  
     }
 }
 
@@ -43,6 +47,12 @@ var px=canvas.width,px2=canvas.width+canvas.width/1.25;      // plant
 var px3 = canvas.width+canvas.width/2.2, px4 = canvas.width+canvas.width/4;
 var life = 100;
 var score = 0;
+var page = 1; //page
+
+// Menu
+function menu1(){
+    ctx.drawImage(menu,0,0,canvas.width,canvas.height);
+}
 
 function gameloop(){
     //background
@@ -217,6 +227,11 @@ function gameloop(){
 // fps
 function start() {
     window.requestAnimationFrame(start);  // refresh rate of screen 
-    gameloop();
+    if(page==1){
+        menu1();
+    }
+    else if(page==2){
+        gameloop();
+    }         
 }
 start();

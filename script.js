@@ -4,6 +4,7 @@ var owl = document.getElementById("owl");
 var plant = document.getElementById("plant");
 
 var frog = document.getElementById("frog");
+var insect1 = document.getElementById("insect1");
 
 
 var ctx = canvas.getContext('2d');
@@ -31,12 +32,17 @@ function moveSomething(e) {
 
 // global variable 
 var auto=0,space=0;
-var fx=0,fy=canvas.height-100, xjump=6;  //frog
-var xbg=0;   //background
+var auto=0,xbg=0;   //background
 var xwater=0;  vel_water=4; //water
+var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var ins_x=canvas.width, ins_y=450, Bool=false;  //insect 
+var xbg=0;   //background
+var auto=0;
+var space =0;
 var xowl=0,yowl=50, boolowl=false;       //owl
 var px=canvas.width,px2=canvas.width+canvas.width/1.25;      // plant
 var px3 = canvas.width+canvas.width/2.2, px4 = canvas.width+canvas.width/4;
+
 
 function gameloop(){
     //background
@@ -54,6 +60,30 @@ function gameloop(){
     if( xwater < (-1*canvas.width) ){
         xwater = 0;
     }
+
+
+     //frog
+     if(auto==1){
+        fy -=10;
+        fx+=xjump;
+        if(fy<=400){
+            auto=0;
+            fy +=10;
+        }
+    }
+    if(auto==0 && fy>=400 && fy <canvas.height-100){
+        fy +=10;
+        fx+=xjump;
+    }
+    if(fy==557){
+        space=0;
+    }
+    // console.log(fy);
+    ctx.drawImage(frog,fx,fy,100,50);
+    if(fx>=0){
+        fx-=1;
+    }
+
 
     //owl
     if(boolowl){
@@ -95,7 +125,6 @@ function gameloop(){
     if(fx>=0){
         fx-=1;
     }
-
     //plant 
     if(px<-20){
         px=canvas.width;
@@ -118,6 +147,32 @@ function gameloop(){
     ctx.drawImage(plant,px2,520,80,100);
     ctx.drawImage(plant,px3,520,80,100);
     ctx.drawImage(plant, px4, 520,80,100)
+
+    //insect
+    if( ins_y>449 && Bool == false )
+    {
+        ins_y += 1;
+        if( ins_y>=500 )
+        {
+            Bool = true;
+        }
+    }
+    if(Bool == true)
+        {
+            ins_y -= 1;
+            if( ins_y<450 )
+            {
+                Bool = false;
+                ins_y = 450;
+            }
+        }
+        if(ins_x<-50){
+            ins_x=canvas.width;
+        }
+    ctx.drawImage(insect1, ins_x,ins_y,50,30);
+    ins_x -= 5;
+
+
 }
 
 // fps

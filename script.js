@@ -3,10 +3,9 @@ var canvas = document.getElementById("s1");
 var background = document.getElementById("background");
 var owl = document.getElementById("owl");
 var plant = document.getElementById("plant");
-
+var drone = document.getElementById("drone");
 var frog = document.getElementById("frog");
 var insect1 = document.getElementById("insect1");
-
 var gameover1 = document.getElementById("gameover");
 
 
@@ -40,7 +39,7 @@ function moveSomething(e) {
 var auto=0,space=0;
 var auto=0,xbg=0;   //background
 var xwater=0;  vel_water=4; //water
-var fx=0,fy=canvas.height-100, xjump=6;  //frog
+var fx=0,fy=canvas.height-100, xjump=8;  //frog
 var ins_x=canvas.width, ins_y=450, Bool=false;  //insect 
 var xbg=0;   //background
 var auto=0;
@@ -51,6 +50,8 @@ var px3 = canvas.width+canvas.width/2.2, px4 = canvas.width+canvas.width/4;
 var life = 100;
 var score = 0;
 var page = 1; //page
+var ydro =50, Booldrone=false; //drone
+var x=1,y=1, rn = Math.floor(Math.random() * 120) + canvas.width; //bomb
 
 // Menu
 function menu1(){
@@ -116,6 +117,59 @@ function gameloop(){
     }
     ctx.drawImage(owl, xowl,yowl,100,80);
     xowl +=4;
+
+    // drone
+    if(score>200){ 
+        if( ydro>49 && Booldrone == false )
+        {
+            ydro += 0.5;
+            if( ydro>=100 )
+            {
+                Booldrone = true;
+            }
+        }
+        if(Booldrone == true)
+            {
+                ydro -= 0.5;
+                if( ydro<51 )
+                {
+                    Booldrone = false;
+                    ydro = 50;
+                }
+            }
+        ctx.drawImage(drone,20,ydro, 150 ,80);
+    
+        // bomb
+        var eA;
+        eA = Math.PI*2;
+        if(y<canvas.height)
+        {
+            x = rn*Math.log(y);
+        } 
+        if(y>canvas.height)
+        {
+            x = 1;
+            y = 1;
+            rn = Math.floor(Math.random() * 120) + 80;
+            document.getElementById("gun").play();
+        }
+        ctx.beginPath(); 
+        ctx.fillStyle = 'black';
+        x_bomb_pos =x+130;
+        y_bomb_pos = y+60+ydro;
+        ctx.arc( x_bomb_pos, y_bomb_pos, 10, 0, eA );   
+        ctx.fill(); 
+        y += 5; 
+            
+        // drone and frog collision 
+        if((y_bomb_pos>=canvas.height-100 && y_bomb_pos<=canvas.height) &&
+             (   (fx+20 <= x_bomb_pos) && (x_bomb_pos<=fx+120)   ) )
+            {
+                life -= 10;
+                document.getElementById("beep").play();
+                y +=500;    //  when bomb and shield both values are same.
+            }
+    }
 
     //frog 
     if(auto==1){
@@ -213,7 +267,7 @@ function gameloop(){
     // 
     if(score>100){
         vel_water=6;
-        xjump=4;
+        xjump=6;
     }
 
     // socre increment

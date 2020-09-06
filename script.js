@@ -11,22 +11,57 @@ var gameover1 = document.getElementById("gameover");
 
 
 var ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = 1366;// window.innerWidth;
+canvas.height = 657; //window.innerHeight;
 
+//touch event 
+window.addEventListener("touchstart", touch1, false);
+function touch1(){
+    page=2;
+    if (tou ==0){
+        page = 2;
+        tou =1;
+    }
+    if (page==2){
+        if(fx >= -10 && fx <canvas.width-100 && event.touches[0].clientX>670){
+            if(space==0){
+            document.getElementById("frogjump").play(); 
+            auto = 1;
+            space=1;
+            }
+        }
+    }
+
+}
+
+// touch move
+window.addEventListener("touchmove", touchmove1);
+function touchmove1(){
+    if(event.touches[0].clientX<670){
+        if( fx > -1 && fx < canvas.width-100){
+            fx-=10;
+        }
+    }
+}
+
+//key-event
 window.addEventListener("keydown", moveSomething, false);
 function moveSomething(e) {
     switch(e.keyCode) {
     case 32:
         // space bar
+        if(fx >= -10 && fx <canvas.width-100){
         if(space==0){
         document.getElementById("frogjump").play(); 
         auto = 1;
         space=1;
         }
+    }
         break;
     case 65: //A
+    if( fx > -1 && fx < canvas.width-100){
         fx-=10;
+    }
         break;      
     case 13:   //enter
         document.getElementById("river").play();
@@ -60,6 +95,7 @@ var stx=Math.floor(Math.random()*(canvas.width-50)), sty=-150; //stone
 var level =1;
 var ydro =50, Booldrone=false; //drone
 var x=1,y=1, rn = Math.floor(Math.random() * 120) + canvas.width; //bomb
+var tou = 0;
 
 // Menu
 function menu1(){
@@ -98,7 +134,7 @@ function gameloop(){
         xbg = 0;
     }
     
-    // water
+    // river flow
     ctx.drawImage(water, xwater ,520, canvas.width, 140);
     xwater -= vel_water;
     ctx.drawImage(water, xwater+canvas.width ,520, canvas.width, 140);
@@ -123,7 +159,6 @@ function gameloop(){
     if(fy>=557){
         space=0;
     }
-    // console.log(fy);
     ctx.drawImage(frog,fx,fy,100,50);
     if(fx>=0){
         fx-=1;
@@ -198,7 +233,7 @@ function gameloop(){
             {
                 life -= 50;
                 document.getElementById("beep").play();
-                y +=500;    //  when bomb and shield both values are same.
+                y +=500;    //  when bomb and frog both values are same.
             }
     }
 
@@ -218,11 +253,11 @@ function gameloop(){
     if(fy>=557){
         space=0;
     }
-    // console.log(fy);
     ctx.drawImage(frog,fx,fy,100,50);
     if(fx>=0){
         fx-=1;
     }
+    
     //plant 
     if(px<-20){
         px=canvas.width;
@@ -302,7 +337,7 @@ function gameloop(){
     ctx.fillStyle = "black";
     ctx.fillText("score : " + score, canvas.width-100, 50);
 
-    // 
+    // Level 2 
     if(score>100){
         vel_water=8;
         xjump=6;
@@ -341,6 +376,7 @@ function gameloop(){
 function gameover(){
     ctx.drawImage(gameover1, 0,0,canvas.width,canvas.height);
     document.getElementById("river").pause();
+    document.getElementById("gameover_music").play();
     ctx.font="40px Gill Sans";
     ctx.fillStyle = "black";
     ctx.fillText(score, 900, 450);
